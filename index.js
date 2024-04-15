@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+const logger = require('morgan')
 const app = express();
 const {MongoClient} = require('mongodb');
 const urlparser = require('url')
@@ -16,13 +17,16 @@ const port = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(logger('dev'))
 
 app.use('/public', express.static(`${process.cwd()}/public`));
 
 app.get('/', function(req, res) {
   res.sendFile(process.cwd() + '/views/index.html');
 });
-
+// app.get('/new', (req, res)=>{
+//   console.log('hello')
+// })
 // Your first API endpoint
 app.post('/api/shorturl', function(req, res) {
   console.log(req.body)
