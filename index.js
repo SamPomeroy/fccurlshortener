@@ -56,6 +56,6 @@ app.get('/api/short_url/:short_url', async (req, res)=>{
   res.redirect(urlDoc.url)
 })
 
-app.listen(3000, function() {
+app.listen(port, function() {
   console.log(`Listening on port ${port}`);
 });
